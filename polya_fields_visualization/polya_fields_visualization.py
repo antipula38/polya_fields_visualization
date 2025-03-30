@@ -8,7 +8,7 @@ from typing import Union
 from matplotlib import cm
 from matplotlib.animation import FuncAnimation
 from mpl_toolkits.mplot3d.art3d import Line3DCollection
-from utils import validate_input, conjugate_function
+from .utils import validate_input, conjugate_function
 
 def visualization(f: Callable, x_range: Union[tuple[float, float, int], list[float]],
                   y_range: Union[tuple[float, float, int], list[float]], **kwargs):
