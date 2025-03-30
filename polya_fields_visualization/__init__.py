@@ -1,4 +1,4 @@
-from polya_visualization import (
+from polya_fields_visualization import (
     visualization,
     animate_particles,
     visualization_sphere,
