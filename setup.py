@@ -4,12 +4,12 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="Polya-Fields-Visualization-",
+    name="polya_fields_visualization",
     version="0.1.0",
     author="Antipova Yulia",
     author_email="antipula38@gmail.com",
     description="Visualization of complex functions using Polya fields",
-    url="https://github.com/antipula38/Polya-Fields-Visualization-.git",
+    url="https://github.com/antipula38/polya_fields_visualization.git",
     packages=find_packages(),
     install_requires=[
         'numpy>=1.21.0',
