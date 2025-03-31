@@ -132,7 +132,7 @@ animate_particles(
     interval=30
 )
 ```
-![5](images/Figure_5.gif)
+![5](images/Figure-5.gif)
 ```python
 animate_particles(
     lambda z: z,
@@ -140,7 +140,7 @@ animate_particles(
     show_vectors=True
 )
 ```
-![6](images/Figure_6.gif)
+![6](images/Figure-6.gif)
 ## 4. Animmation sphere
 ```python
 animate_sphere(
@@ -152,7 +152,7 @@ animate_sphere(
     contour_func=lambda t: np.exp(2j * np.pi * t)
 )
 ```
-![7](images/Figure_7.gif)
+![7](images/Figure-7.gif)
 ```python
 animate_sphere(
     lambda z: z,
@@ -161,4 +161,4 @@ animate_sphere(
     contour_func=lambda t: np.exp(2j * np.pi * t)
 )
 ```
-![8](images/Figure_8.gif)
+![8](images/Figure-8.gif)
