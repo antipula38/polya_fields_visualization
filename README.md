@@ -86,6 +86,7 @@ visualization(
     (-5, 5, 15), (-5, 5, 15)
 )
 ```
+![1](images/Figure_1.png)
 ```python
 visualization(
     lambda z: z * z,
@@ -95,6 +96,7 @@ visualization(
     contour_func=lambda t: np.exp(1j*t)
 )
 ```
+![2](images/Figure_2.png)
 ```python
 visualization(
     lambda z: z * z,
@@ -103,6 +105,7 @@ visualization(
     color_vector="plasma",
     title_plot='f(z) = $z^2$'
 )
+![3](images/Figure_3.png)
 ```
 ## 2. Static sphere
 ```python
@@ -114,6 +117,7 @@ visualization_sphere(
     contour_linewidth=3
 )
 ```
+![4](images/Figure_4.png)
 ## 3. Animmation 2D
 ```python
 animate_particles(
@@ -128,6 +132,7 @@ animate_particles(
     interval=30
 )
 ```
+![5](images/Figure_5.gif)
 ```python
 animate_particles(
     lambda z: z,
@@ -135,6 +140,7 @@ animate_particles(
     show_vectors=True
 )
 ```
+![6](images/Figure_6.gif)
 ## 4. Animmation sphere
 ```python
 animate_sphere(
@@ -146,6 +152,7 @@ animate_sphere(
     contour_func=lambda t: np.exp(2j * np.pi * t)
 )
 ```
+![7](images/Figure_7.gif)
 ```python
 animate_sphere(
     lambda z: z,
@@ -154,3 +161,4 @@ animate_sphere(
     contour_func=lambda t: np.exp(2j * np.pi * t)
 )
 ```
+![8](images/Figure_8.gif)
