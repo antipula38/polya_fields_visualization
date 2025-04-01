@@ -89,12 +89,13 @@ def visualization_anim(f: Callable, x_range: Union[tuple[float, float, int], lis
                  color=map_f['contour_color'],
                 linewidth=map_f['contour_linewidth'],
                 label=map_f["label_contour"])
-    ax.set_xlabel('Re(z)')
-    ax.set_ylabel('Im(z)')
-    ax.set_title("The vector field of the function f(z)")
+
+    ax.set_xlabel(map_f["lable_x"])
+    ax.set_ylabel(map_f["lable_z"])
+    ax.set_title(map_f["title_plot"])
     ax.grid()
-    ax.axhline(0, color='black', linewidth=0.5)
-    ax.axvline(0, color='black', linewidth=0.5)
+    ax.axhline(0, color=map_f["color_line_x"], linewidth=map_f["width_line_x"])
+    ax.axvline(0, color=map_f["color_line_y"], linewidth=map_f["width_line_y"])
 
     interpolator_u = RegularGridInterpolator((x, y), U_norm.T, bounds_error=False, fill_value=0)
     interpolator_v = RegularGridInterpolator((x, y), V_norm.T, bounds_error=False, fill_value=0)
@@ -304,6 +305,18 @@ def animate_sphere(f: Callable,
                 color=map_f['contour_color'],
                 linewidth=map_f['contour_linewidth'],
                 label=map_f["label_contour"])
+        ax.set_xlabel(map_f["lable_x"])
+
+    ax.set_ylabel(map_f["lable_y"])
+    ax.set_zlabel(map_f["lable_z"])
+    ax.set_title(map_f["title_plot"])
+    ax.xaxis.line.set_color(map_f["color_line_x"])
+    ax.yaxis.line.set_color(map_f["color_line_y"])
+    ax.zaxis.line.set_color(map_f["color_line_z"])
+
+    ax.xaxis.line.set_linewidth(map_f["width_line_x"])
+    ax.yaxis.line.set_linewidth(map_f["width_line_y"])
+    ax.zaxis.line.set_linewidth(map_f["width_line_z"])
 
     particles = np.random.uniform(low=[-1, -1, -1], high=[1, 1, 1], size=(map_f["num_particles"], 3))
     particles /= np.linalg.norm(particles, axis=1, keepdims=True)
@@ -349,4 +362,5 @@ def animate_sphere(f: Callable,
 
     ani = FuncAnimation(fig, update, frames=map_f["frames"], interval=map_f["interval"], 
                        blit=False, repeat=True)
+    plt.gca().set_aspect('equal')
     plt.show()
