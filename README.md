@@ -36,7 +36,6 @@ All functions require these parameters:
 | `contour_func`        | `Callable`                | Function defining a closed contour                                          | `None`                |
 | `contour_color`       | `str`                     | Contour line color                                                          | `"green"`             |
 | `contour_linewidth`   | `float`/`int`             | Contour line thickness                                                      | `2.0`                 |
-| `label_contour`       | `str`                     | Contour legend label                                                        | `"Contour"`           |
 | `label_x`             | `str`                     | X-axis label                                                                | `"X"`                 |
 | `label_y`             | `str`                     | Y-axis label                                                                | `"Y"`                 |
 | `color_line_x`        | Matplotlib color          | X-axis color                                                                | `"black"`             |
