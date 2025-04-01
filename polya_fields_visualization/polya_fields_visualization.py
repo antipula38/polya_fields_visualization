@@ -91,7 +91,7 @@ def visualization_anim(f: Callable, x_range: Union[tuple[float, float, int], lis
                 label=map_f["label_contour"])
 
     ax.set_xlabel(map_f["lable_x"])
-    ax.set_ylabel(map_f["lable_z"])
+    ax.set_ylabel(map_f["lable_y"])
     ax.set_title(map_f["title_plot"])
     ax.grid()
     ax.axhline(0, color=map_f["color_line_x"], linewidth=map_f["width_line_x"])
