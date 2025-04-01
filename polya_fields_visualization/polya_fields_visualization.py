@@ -42,8 +42,7 @@ def visualization(f: Callable, x_range: Union[tuple[float, float, int], list[flo
         
         plt.plot(x_contour, y_contour, 
                 color=map_f['contour_color'],
-                linewidth=map_f['contour_linewidth'],
-                label=map_f["label_contour"])
+                linewidth=map_f['contour_linewidth'])
     plt.xlabel(map_f["lable_x"])
     plt.ylabel(map_f["lable_y"])
     plt.title(map_f["title_plot"])
@@ -87,8 +86,7 @@ def visualization_anim(f: Callable, x_range: Union[tuple[float, float, int], lis
         
         plt.plot(x_contour, y_contour, 
                  color=map_f['contour_color'],
-                linewidth=map_f['contour_linewidth'],
-                label=map_f["label_contour"])
+                linewidth=map_f['contour_linewidth'])
 
     ax.set_xlabel(map_f["lable_x"])
     ax.set_ylabel(map_f["lable_y"])
@@ -206,8 +204,7 @@ def visualization_sphere(f: Callable,
         
         ax.plot(xi_contour, eta_contour, zeta_contour,
                 color=map_f['contour_color'],
-                linewidth=map_f['contour_linewidth'],
-                label=map_f["label_contour"])
+                linewidth=map_f['contour_linewidth'])
 
     ax.set_xlabel(map_f["lable_x"])
     ax.set_ylabel(map_f["lable_y"])
@@ -303,8 +300,7 @@ def animate_sphere(f: Callable,
         
         ax.plot(xi_contour, eta_contour, zeta_contour,
                 color=map_f['contour_color'],
-                linewidth=map_f['contour_linewidth'],
-                label=map_f["label_contour"])
+                linewidth=map_f['contour_linewidth'])
         ax.set_xlabel(map_f["lable_x"])
 
     ax.set_ylabel(map_f["lable_y"])
