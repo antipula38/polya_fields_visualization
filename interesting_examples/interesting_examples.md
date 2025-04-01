@@ -1,9 +1,9 @@
 # Characteristic Functions of Distributions
 
 The characteristic function of a random variable is defined as:
-$$
+$
 \phi_X(t) = \mathbb{E}\left[e^{itX}\right],
-$$
+$
 where $\mathbb{E}$ is the expectation, $i$ is the imaginary unit, and $t \in \mathbb{R}$.
 
 ---
@@ -18,9 +18,9 @@ import numpy as np
 ### 1. Normal Distribution $\mathcal{N}(\mu, \sigma^2)$
 - **Parameters**: $\mu \in \mathbb{R}$, $\sigma^2 > 0$.
 - **Characteristic function**:
-  $$
+  $
   \phi(t) = \exp\left(i\mu t - \frac{\sigma^2 t^2}{2}\right).
-  $$
+  $
 ```python
 def normal_characteristic(t, mu=1, sigma=5):
     return np.exp(1j * mu * t - 0.5 * (sigma ** 2) * (t ** 2))
@@ -32,9 +32,9 @@ visualization_anim(normal_characteristic, (-5, 5, 20), (-5, 5, 20), show_vectors
 ### 2. Bernoulli Distribution $\text{Bernoulli}(p)$
 - **Parameter**: $p \in [0, 1]$.
 - **Characteristic function**:
-  $$
+  $
   \phi(t) = 1 - p + pe^{it}.
-  $$
+  $
 ```python
 def bernoulli_characteristic(t, p=0.5):
     return 1 - p + p * np.exp(1j * t)
@@ -45,9 +45,9 @@ visualization_anim(bernoulli_characteristic, (-5, 5, 20), (-5, 5, 20), show_vect
 ### 3. Binomial Distribution $\text{Binomial}(n, p)$
 - **Parameters**: $n \in \mathbb{N}$, $p \in [0, 1]$.
 - **Characteristic function**:
-  $$
+  $
   \phi(t) = (1 - p + pe^{it})^n.
-  $$
+  $
 ```python
 def binomial_characteristic(t, n=10, p=0.3):
     return (1 - p + p * np.exp(1j * t))**n
@@ -59,9 +59,9 @@ visualization_anim(binomial_characteristic, (-5, 5, 20), (-5, 5, 20), show_vecto
 ### 4. Poisson Distribution $\text{Poisson}(\lambda)$
 - **Parameter**: $\lambda > 0$.
 - **Characteristic function**:
-  $$
+  $
   \phi(t) = \exp\left(\lambda(e^{it} - 1)\right).
-  $$
+  $
 ```python
 def poisson_characteristic(t, l=2):
     return np.exp(l * (np.exp(1j * t) - 1))
@@ -72,9 +72,9 @@ visualization_anim(poisson_characteristic, (-5, 5, 20), (-5, 5, 20), show_vector
 ### 5. Uniform Distribution $\text{Uniform}(a, b)$
 - **Parameters**: $a < b$.
 - **Characteristic function**:
-  $$
+  $
   \phi(t) = \frac{e^{itb} - e^{ita}}{it(b - a)}.
-  $$
+  $
 ```python
 def uniform_characteristic(t, a=0, b=1):
     if t == 0:
@@ -87,9 +87,9 @@ visualization_anim(uniform_characteristic, (-5, 5, 20), (-5, 5, 20), show_vector
 ### 6. Exponential Distribution $\text{Exp}(\lambda)$
 - **Parameter**: $\lambda > 0$.
 - **Characteristic function**:
-  $$
+  $
   \phi(t) = \frac{\lambda}{\lambda - it}.
-  $$
+  $
 ```python
 def exponential_characteristic(t, l=1):
     return l / (l - 1j * t)
