@@ -6,7 +6,7 @@ The Polya fields tool enhances the intuition of complex functions and their inte
 ## Overview
 The module provides four functions for visualizing complex functions via Polya fields:
 1. **Static vector field/streamlines**: `visualization`
-2. **Animated vector field/streamlines**: `animate_particles`
+2. **Animated vector field/streamlines**: `visualization_anim`
 3. **Static Riemann sphere visualization (vectors/streamlines)**: `visualization_sphere`
 4. **Animated Riemann sphere visualization**: `animate_sphere`
 
@@ -68,7 +68,7 @@ All functions require these parameters:
 
 ---
 
-#### Animation Settings (`animate_particles`, `animate_sphere`)
+#### Animation Settings (`visualization_anim`, `animate_sphere`)
 
 | Parameter           | Type             | Description                                                                 | Default       |
 |---------------------|------------------|-----------------------------------------------------------------------------|---------------|
@@ -126,7 +126,7 @@ visualization_sphere(
 ![4](images/Figure_4.png)
 ## 3. Animmation 2D
 ```python
-animate_particles(
+visualization_anim(
     lambda z: z,
     (-3, 3, 50), (-3, 3, 50),
     color_vector="plasma",
@@ -140,7 +140,7 @@ animate_particles(
 ```
 ![5](images/Figure-5.gif)
 ```python
-animate_particles(
+visualization_anim(
     lambda z: z,
     (-3, 3, 50), (-3, 3, 50),
     show_vectors=True
@@ -175,5 +175,5 @@ pip install git+https://github.com/antipula38/polya_fields_visualization.git
 ```
 After installation, import the visualization functions in your Python code:
 ```python
-from polya_fields_visualization import visualization, visualization_sphere, animate_sphere, animate_particles
+from polya_fields_visualization import visualization, visualization_sphere, animate_sphere, visualization_anim
 ```
