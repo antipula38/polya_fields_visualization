@@ -49,7 +49,7 @@ All functions require these parameters:
 
 ---
 
-#### 2D Settings (`visualization_sphere`, `animate_sphere`)
+#### 2D Settings (`visualization`, `visualization_anim`)
 
 | Parameter           | Type             | Description                                  | Default     |
 |---------------------|------------------|----------------------------------------------|-------------|
