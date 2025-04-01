@@ -10,6 +10,8 @@ from matplotlib.animation import FuncAnimation
 from mpl_toolkits.mplot3d.art3d import Line3DCollection
 from .utils import validate_input, conjugate_function
 
+eps = 1e-8
+
 def visualization(f: Callable, x_range: Union[tuple[float, float, int], list[float]],
                   y_range: Union[tuple[float, float, int], list[float]], **kwargs):
     x, y, map_f = validate_input(f, x_range, y_range, "2d", True, **kwargs)
@@ -19,15 +21,12 @@ def visualization(f: Callable, x_range: Union[tuple[float, float, int], list[flo
     U = np.real(Z)
     V = np.imag(Z)
     # normalization
-    normalization = np.sqrt(U ** 2 + V ** 2)
-    normalization[normalization == 0] = 1
+    normalization = np.sqrt(U ** 2 + V ** 2) + eps
     U_norm = U / normalization
     V_norm = V / normalization
     plt.figure(figsize=map_f["fig_size"])
     if map_f["type_plot"] == "vector":
-        plt.quiver(X, Y, U_norm, V_norm, normalization, angles='xy', scale_units='xy', scale=1,
-                   cmap=map_f["color_vector"],
-                   pivot='mid')
+        plt.quiver(X, Y, U_norm, V_norm, normalization,cmap=map_f["color_vector"], pivot='mid')
         plt.colorbar(label='Vector length')
     elif map_f["type_plot"] == "stream":
         strm = plt.streamplot(X, Y, U_norm, V_norm, color=U, linewidth=map_f["width_line"], cmap=map_f["color_vector"])
@@ -55,7 +54,7 @@ def visualization(f: Callable, x_range: Union[tuple[float, float, int], list[flo
     plt.show()
 
 
-def animate_particles(f: Callable, x_range: Union[tuple[float, float, int], list[float]],
+def visualization_anim(f: Callable, x_range: Union[tuple[float, float, int], list[float]],
                   y_range: Union[tuple[float, float, int], list[float]], **kwargs):
     x, y, map_f = validate_input(f, x_range, y_range, "2d", False, **kwargs)
     X, Y = np.meshgrid(x, y)
@@ -63,15 +62,19 @@ def animate_particles(f: Callable, x_range: Union[tuple[float, float, int], list
     U = np.real(Z)
     V = np.imag(Z)
 
-    normalization = np.sqrt(U ** 2 + V ** 2)
+    normalization = np.sqrt(U ** 2 + V ** 2) + eps
     U_norm = U / normalization
     V_norm = V / normalization
 
     fig = plt.figure(figsize=map_f["fig_size"])
     ax = fig.add_subplot()
     if map_f["show_vectors"]:
-        strm = ax.streamplot(X, Y, U_norm, V_norm, color=U, linewidth=2, cmap=map_f["color_vector"])
-        plt.colorbar(strm.lines)
+        if map_f["type_plot"] == "vector":
+            q = ax.quiver(X, Y, U_norm, V_norm, normalization, cmap=map_f["color_vector"], pivot='mid')
+            plt.colorbar(q, label='Vector length')
+        elif map_f["type_plot"] == "stream":
+            strm = ax.streamplot(X, Y, U_norm, V_norm, color=U, linewidth=2, cmap=map_f["color_vector"])
+            plt.colorbar(strm.lines)
 
     if map_f["contour_func"] is not None:
         theta = np.linspace(0, 2*np.pi, 1000)
@@ -161,8 +164,7 @@ def visualization_sphere(f: Callable,
     V_3d = deta_dX * U + deta_dY * V
     W_3d = dzeta_dX * U + dzeta_dY * V
 
-    normalization = np.sqrt(U_3d ** 2 + V_3d ** 2 + W_3d ** 2)
-    normalization[normalization == 0] = 1
+    normalization = np.sqrt(U_3d ** 2 + V_3d ** 2 + W_3d ** 2) + eps
     U_3d_norm = U_3d / normalization
     V_3d_norm = V_3d / normalization
     W_3d_norm = W_3d / normalization
@@ -252,8 +254,7 @@ def animate_sphere(f: Callable,
     V_3d = deta_dX * U + deta_dY * V
     W_3d = dzeta_dX * U + dzeta_dY * V
 
-    normalization = np.sqrt(U_3d ** 2 + V_3d ** 2 + W_3d ** 2)
-    normalization[normalization == 0] = 1
+    normalization = np.sqrt(U_3d ** 2 + V_3d ** 2 + W_3d ** 2) + eps
     U_3d_norm = U_3d / normalization
     V_3d_norm = V_3d / normalization
     W_3d_norm = W_3d / normalization
@@ -316,8 +317,8 @@ def animate_sphere(f: Callable,
         nonlocal particles, trails
         for i in range(map_f["num_particles"]):
             pos = particles[i]
-            x_proj = pos[0] / (1 - pos[2] + 1e-8)
-            y_proj = pos[1] / (1 - pos[2] + 1e-8)
+            x_proj = pos[0] / (1 - pos[2] + eps)
+            y_proj = pos[1] / (1 - pos[2] + eps)
             
             if not (x_min <= x_proj <= x_max and y_min <= y_proj <= y_max):
                 particles[i] = np.random.uniform([-1, -1, -1], [1, 1, 1])
@@ -330,7 +331,7 @@ def animate_sphere(f: Callable,
             w = interpolator_w([[x_proj, y_proj]])[0]
             vec = np.array([u, v, w])
             
-            vec_norm = vec / (np.linalg.norm(vec) + 1e-8)
+            vec_norm = vec / (np.linalg.norm(vec) + eps)
             
             particles[i] += vec_norm * map_f["dt"]
             particles[i] /= np.linalg.norm(particles[i])

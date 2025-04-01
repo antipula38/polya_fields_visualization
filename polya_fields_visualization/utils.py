@@ -22,7 +22,7 @@ def validate_input(f: Callable,
             "type_plot": "vector",
             "lable_x": "X",
             "lable_y": "Y",
-            "title_plot": f"Vector field of {f.__name__}(z)",
+            "title_plot": "Vizualization",
             "color_line_x": "black",
             "color_line_y": "black",
             "width_line_x": 0.5,
@@ -33,16 +33,14 @@ def validate_input(f: Callable,
             "vector_scale": 0.1,
             "contour_func": None,
             "contour_color": "green",
-            "contour_linewidth": 2,
-            "label_contour": 'Contour'
+            "contour_linewidth": 2
         }
     else:
         config = {
-            "type_plot": "vector",
             "lable_x": "X",
             "lable_y": "Y",
             "lable_z": "Z",
-            "title_plot": f"Vector field of {f.__name__}(z)",
+            "title_plot": "Vizualization",
             "color_line_x": "black",
             "color_line_y": "black",
             "color_line_z": "black",
@@ -57,8 +55,7 @@ def validate_input(f: Callable,
             "subsampling": 2,
             "contour_func": None,
             "contour_color": "green",
-            "contour_linewidth": 2,
-            "label_contour": 'Contour'
+            "contour_linewidth": 2
         }
     
     if not static:
@@ -116,13 +113,13 @@ def validate_input(f: Callable,
                 raise TypeError("contour_func must be a callable function")
             config[key] = value
         elif key in ["vector_scale", "width_line_x", "width_line_y", "width_line", 
-                    "dt", "trail_length", "trail_width", "vector_length", "contour_linewidth"]:
+                    "dt", "vector_length", "contour_linewidth"]:
             if not isinstance(value, (int, float)):
                 raise TypeError(f"'{key}' must be a number")
             if value <= 0:
                 raise ValueError(f"'{key}' must be positive")
                 
-        elif key in ["num_particles", "frames", "interval", "subsampling"]:
+        elif key in ["num_particles", "frames", "interval", "subsampling", "trail_length", "trail_width"]:
             if not isinstance(value, int):
                 raise TypeError(f"'{key}' must be an integer")
             if value <= 0:
@@ -151,11 +148,15 @@ def validate_input(f: Callable,
     return x, y, config
 
 def conjugate_function(f, x, y):
+    eps = 1e-8
     lst = []
     for imag_elem in y:
         row = []
         for real_elem in x:
-            res: complex = f(complex(real_elem, imag_elem))
+            try:
+                res = f(complex(real_elem, imag_elem))
+            except ZeroDivisionError:
+                res = f(complex(real_elem + eps, imag_elem))
             row.append(complex(res.real, -res.imag))
         lst.append(row)
     return lst

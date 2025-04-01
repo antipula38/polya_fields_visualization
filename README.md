@@ -43,11 +43,17 @@ All functions require these parameters:
 | `color_line_y`        | Matplotlib color          | Y-axis color                                                                | `"black"`             |
 | `width_line_x`        | `float`/`int`             | X-axis line thickness                                                       | `0.5`                 |
 | `width_line_y`        | `float`/`int`             | Y-axis line thickness                                                       | `0.5`                 |
-| `type_plot`           | `"vector"` or `"stream"`  | Visualization mode (`vector` for arrows, `stream` for flow lines)           | `"vector"`            |
 | `color_vector`        | [Matplotlib colormap](https://matplotlib.org/stable/gallery/color/colormap_reference.html)      | Colormap for vectors/streamlines  | `"autumn"` |
 | `vector_scale`        | `float`/`int`             | Vector scaling factor                                                       | `0.1`                 |
 | `width_line`          | `float`/`int`             | Line thickness for vectors/streamlines                                      | `2.0`                 |
 
+---
+
+#### 2D Settings (`visualization_sphere`, `animate_sphere`)
+
+| Parameter           | Type             | Description                                  | Default     |
+|---------------------|------------------|----------------------------------------------|-------------|
+| `type_plot`           | `"vector"` or `"stream"`  | Visualization mode (`vector` for arrows, `stream` for flow lines)           | `"vector"`            |
 ---
 
 #### Riemann Sphere Settings (`visualization_sphere`, `animate_sphere`)
@@ -70,7 +76,7 @@ All functions require these parameters:
 | `num_particles`     | `int`            | Number of animated particles                                               | `20`          |
 | `dt`                | `float`/`int`    | Time step for particle motion                                               | `0.1`         |
 | `trail_length`      | `int`            | Length of particle trails (in frames)                                      | `5`           |
-| `trail_width`       | `float`/`int`    | Trail line thickness                                                        | `0.5`         |
+| `trail_width`       | `int`    | Trail line thickness                                                        | `0.5`         |
 | `frames`            | `int`            | Total animation frames                                                     | `100`         |
 | `interval`          | `int`            | Delay between frames (milliseconds)                                        | `50`          |
 | `color_particles`   | [Matplotlib color](https://matplotlib.org/stable/gallery/color/named_colors.html) | Particle/trail color | `"darkgray"` |
