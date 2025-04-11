@@ -171,7 +171,7 @@ animate_sphere(
 #  Installation
 Run in terminal:
 ```bash
-pip install git+https://github.com/antipula38/polya_fields_visualization.git
+pip install git+https://github.com/antipula38/polya_fields_visualization
 ```
 After installation, import the visualization functions in your Python code:
 ```python
