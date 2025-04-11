@@ -143,7 +143,7 @@ visualization_anim(
 visualization_anim(
     lambda z: z,
     (-3, 3, 50), (-3, 3, 50),
-    show_vectors=True
+    show_vectors=True, type_plot="stream"
 )
 ```
 ![6](images/Figure-6.gif)
