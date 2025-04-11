@@ -33,7 +33,8 @@ def validate_input(f: Callable,
             "vector_scale": 0.1,
             "contour_func": None,
             "contour_color": "green",
-            "contour_linewidth": 2
+            "contour_linewidth": 2,
+            "eps": 1e-100
         }
     else:
         config = {
@@ -55,7 +56,8 @@ def validate_input(f: Callable,
             "subsampling": 2,
             "contour_func": None,
             "contour_color": "green",
-            "contour_linewidth": 2
+            "contour_linewidth": 2,
+            "eps": 1e-100
         }
     
     if not static:
@@ -113,7 +115,7 @@ def validate_input(f: Callable,
                 raise TypeError("contour_func must be a callable function")
             config[key] = value
         elif key in ["vector_scale", "width_line_x", "width_line_y", "width_line", 
-                    "dt", "vector_length", "contour_linewidth"]:
+                    "dt", "vector_length", "contour_linewidth", "eps"]:
             if not isinstance(value, (int, float)):
                 raise TypeError(f"'{key}' must be a number")
             if value <= 0:
@@ -147,8 +149,7 @@ def validate_input(f: Callable,
 
     return x, y, config
 
-def conjugate_function(f, x, y):
-    eps = 1e-8
+def conjugate_function(f, x, y, eps):
     lst = []
     for imag_elem in y:
         row = []

@@ -10,14 +10,14 @@ from matplotlib.animation import FuncAnimation
 from mpl_toolkits.mplot3d.art3d import Line3DCollection
 from .utils import validate_input, conjugate_function
 
-eps = 1e-8
 
 def visualization(f: Callable, x_range: Union[tuple[float, float, int], list[float]],
                   y_range: Union[tuple[float, float, int], list[float]], **kwargs):
     x, y, map_f = validate_input(f, x_range, y_range, "2d", True, **kwargs)
     # build vectors
+    eps = map_f["eps"]
     X, Y = np.meshgrid(x, y)
-    Z = conjugate_function(f, x, y)
+    Z = conjugate_function(f, x, y, eps)
     U = np.real(Z)
     V = np.imag(Z)
     # normalization
@@ -57,7 +57,8 @@ def visualization_anim(f: Callable, x_range: Union[tuple[float, float, int], lis
                   y_range: Union[tuple[float, float, int], list[float]], **kwargs):
     x, y, map_f = validate_input(f, x_range, y_range, "2d", False, **kwargs)
     X, Y = np.meshgrid(x, y)
-    Z = conjugate_function(f, x, y)
+    eps = map_f["eps"]
+    Z = conjugate_function(f, x, y, eps)
     U = np.real(Z)
     V = np.imag(Z)
 
@@ -141,7 +142,8 @@ def visualization_sphere(f: Callable,
 
     x, y, map_f = validate_input(f, x_range, y_range, "3d", True, **kwargs)
     X, Y = np.meshgrid(x, y)
-    Z = np.array(conjugate_function(f, x, y), dtype=complex) 
+    eps = map_f["eps"]
+    Z = np.array(conjugate_function(f, x, y, eps), dtype=complex) 
     U = Z.real
     V = Z.imag
 
@@ -229,9 +231,9 @@ def animate_sphere(f: Callable,
     x, y, map_f = validate_input(f, x_range, y_range, "3d", False, **kwargs)
     x_min, x_max = x.min(), x.max()
     y_min, y_max = y.min(), y.max()
-
+    eps = map_f["eps"]
     X, Y = np.meshgrid(x, y)
-    Z = np.array(conjugate_function(f, x, y), dtype=complex)
+    Z = np.array(conjugate_function(f, x, y, eps), dtype=complex)
     U = Z.real
     V = Z.imag
 
