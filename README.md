@@ -38,8 +38,8 @@ All functions require these parameters:
 | `contour_linewidth`   | `float`/`int`             | Contour line thickness                                                      | `2.0`                 |
 | `label_x`             | `str`                     | X-axis label                                                                | `"X"`                 |
 | `label_y`             | `str`                     | Y-axis label                                                                | `"Y"`                 |
-| `color_line_x`        | Matplotlib color          | X-axis color                                                                | `"black"`             |
-| `color_line_y`        | Matplotlib color          | Y-axis color                                                                | `"black"`             |
+| `color_line_x`        | [Matplotlib color](https://matplotlib.org/stable/gallery/color/named_colors.html)          | X-axis color                                                                | `"black"`             |
+| `color_line_y`        | [Matplotlib color](https://matplotlib.org/stable/gallery/color/named_colors.html)          | Y-axis color                                                                | `"black"`             |
 | `width_line_x`        | `float`/`int`             | X-axis line thickness                                                       | `0.5`                 |
 | `width_line_y`        | `float`/`int`             | Y-axis line thickness                                                       | `0.5`                 |
 | `color_vector`        | [Matplotlib colormap](https://matplotlib.org/stable/gallery/color/colormap_reference.html)      | Colormap for vectors/streamlines  | `"autumn"` |
@@ -60,7 +60,7 @@ All functions require these parameters:
 | Parameter           | Type             | Description                                  | Default     |
 |---------------------|------------------|----------------------------------------------|-------------|
 | `label_z`           | `str`            | Z-axis label                                 | `"Z"`       |
-| `color_line_z`      | Matplotlib color | Z-axis color                                 | `"black"`   |
+| `color_line_z`      | [Matplotlib color](https://matplotlib.org/stable/gallery/color/named_colors.html) | Z-axis color                                 | `"black"`   |
 | `width_line_z`      | `float`/`int`    | Z-axis line thickness                        | `0.5`       |
 | `vector_length`     | `float`/`int`    | Vector length on the sphere                  | `0.2`       |
 | `subsampling`       | `int`            | Vector subsampling rate (higher - sparser)   | `2`         |
