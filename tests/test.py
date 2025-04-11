@@ -10,7 +10,7 @@ def test_conjugate_function_basic():
     
     x = [1, 2]
     y = [1, 2]
-    result = conjugate_function(f, x, y)
+    result = conjugate_function(f, x, y, 0)
     
     assert isinstance(result, list)
     assert len(result) == len(y)
@@ -25,7 +25,7 @@ def test_conjugate_function_zero_division():
     
     x = [0, 1]
     y = [0, 1]
-    result = conjugate_function(f, x, y)
+    result = conjugate_function(f, x, y, 1e-8)
     
     assert not np.isnan(result[0][0])
     assert not np.isinf(result[0][0])
@@ -53,10 +53,10 @@ def test_validate_input_errors():
         validate_input("not a function", (-1, 1, 10), (-2, 2, 20), "2d", True)
     
     with pytest.raises(ValueError):
-        validate_input(f, (-1, 1), (-2, 2, 20), "2d", True)  # Не хватает count
+        validate_input(f, (-1, 1), (-2, 2, 20), "2d", True)
     
     with pytest.raises(ValueError):
-        validate_input(f, (1, -1, 10), (-2, 2, 20), "2d", True)  # min > max
+        validate_input(f, (1, -1, 10), (-2, 2, 20), "2d", True)
     
     with pytest.raises(TypeError):
         validate_input(f, "invalid", (-2, 2, 20), "2d", True)
@@ -69,7 +69,7 @@ def test_extreme_values():
     x = [-1e100, 0, 1e100]
     y = [-1e100, 0, 1e100]
 
-    result = conjugate_function(f, x, y)
+    result = conjugate_function(f, x, y, 0)
     assert isinstance(result, list)
     x, y, config = validate_input(f, (-1e100, 1e100, 10), (-1e100, 1e100, 10), "2d", True)
     assert len(x) == 10
