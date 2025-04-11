@@ -104,22 +104,38 @@ def visualization_anim(f: Callable, x_range: Union[tuple[float, float, int], lis
     particles = np.random.uniform(low=[x_min, y_min], high=[x_max, y_max], size=(map_f["num_particles"], 2))
     trails = np.full((map_f["num_particles"], map_f["trail_length"], 2), np.nan)
 
+    position_history = [[] for _ in range(map_f["num_particles"])]
+
     scat = ax.scatter(particles[:, 0], particles[:, 1], color=map_f["color_particles"], s=5)
     trail_lines = LineCollection([], color=map_f["color_particles"], linewidths=map_f["trail_width"])
     ax.add_collection(trail_lines)
 
     def update(frame):
-        nonlocal particles, trails
+        nonlocal particles, trails, position_history
         for i in range(map_f["num_particles"]):
+            if len(position_history[i]) >= 2:
+                recent_pos = np.array(position_history[i][-2:])
+                if np.all(np.linalg.norm(recent_pos - recent_pos[0], axis=1) < 0.001):
+                    particles[i] = np.random.uniform([x_min, y_min], [x_max, y_max])
+                    trails[i] = np.full((map_f["trail_length"], 2), np.nan)
+                    position_history[i] = []
+                    continue
+        
             x, y = particles[i]
             u = interpolator_u([[x, y]])[0]
             v = interpolator_v([[x, y]])[0]
             particles[i, 0] += u * map_f["dt"]
             particles[i, 1] += v * map_f["dt"]
 
+            position_history[i].append(particles[i].copy())
+            if len(position_history[i]) > 2:
+                position_history[i].pop(0)
+
             if not (x_min <= particles[i, 0] <= x_max and y_min <= particles[i, 1] <= y_max):
                 particles[i] = np.random.uniform([x_min, y_min], [x_max, y_max])
                 trails[i] = np.full((map_f["trail_length"], 2), np.nan)
+                position_history[i] = []
+                continue
 
             trails[i] = np.roll(trails[i], shift=-1, axis=0)
             trails[i][-1] = particles[i]
@@ -320,21 +336,33 @@ def animate_sphere(f: Callable,
     particles /= np.linalg.norm(particles, axis=1, keepdims=True)
     trails = np.full((map_f["num_particles"], map_f["trail_length"], 3), np.nan)
 
+    position_history = [[] for _ in range(map_f["num_particles"])]
+
     scat = ax.scatter(particles[:, 0], particles[:, 1], particles[:, 2], color=map_f["color_particles"], s=10)
     trail_lines = Line3DCollection([], color=map_f["color_particles"], linewidths=map_f["trail_width"])
     ax.add_collection(trail_lines)
 
     def update(frame):
-        nonlocal particles, trails
+        nonlocal particles, trails, position_history
         for i in range(map_f["num_particles"]):
             pos = particles[i]
             x_proj = pos[0] / (1 - pos[2] + eps)
             y_proj = pos[1] / (1 - pos[2] + eps)
             
+            if len(position_history[i]) >= 2:
+                recent_pos = np.array(position_history[i][-2:])
+                if np.all(np.linalg.norm(recent_pos - recent_pos[0], axis=1) < 0.001):
+                    particles[i] = np.random.uniform([-1, -1, -1], [1, 1, 1])
+                    particles[i] /= np.linalg.norm(particles[i])
+                    trails[i] = np.full((map_f["trail_length"], 3), np.nan)
+                    position_history[i] = []
+                    continue
+
             if not (x_min <= x_proj <= x_max and y_min <= y_proj <= y_max):
                 particles[i] = np.random.uniform([-1, -1, -1], [1, 1, 1])
                 particles[i] /= np.linalg.norm(particles[i])
                 trails[i] = np.full((map_f["trail_length"], 3), np.nan)
+                position_history[i] = []
                 continue
 
             u = interpolator_u([[x_proj, y_proj]])[0]
@@ -347,6 +375,9 @@ def animate_sphere(f: Callable,
             particles[i] += vec_norm * map_f["dt"]
             particles[i] /= np.linalg.norm(particles[i])
 
+            position_history[i].append(particles[i].copy())
+            if len(position_history[i]) > 2:
+                position_history[i].pop(0)
 
             trails[i] = np.roll(trails[i], shift=-1, axis=0)
             trails[i][-1] = particles[i]
