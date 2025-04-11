@@ -30,7 +30,6 @@ def validate_input(f: Callable,
             "fig_size": (8, 8),
             "width_line": 2,
             "color_vector": "autumn",
-            "vector_scale": 0.1,
             "contour_func": None,
             "contour_color": "green",
             "contour_linewidth": 2,
@@ -51,7 +50,6 @@ def validate_input(f: Callable,
             "fig_size": (8, 8),
             "width_line": 2,
             "color_vector": 'autumn',
-            "vector_scale": 0.1,
             "vector_length": 0.2,
             "subsampling": 2,
             "contour_func": None,
@@ -114,11 +112,11 @@ def validate_input(f: Callable,
             if not callable(value):
                 raise TypeError("contour_func must be a callable function")
             config[key] = value
-        elif key in ["vector_scale", "width_line_x", "width_line_y", "width_line", 
+        elif key in ["width_line_x", "width_line_y", "width_line", 
                     "dt", "vector_length", "contour_linewidth", "eps"]:
             if not isinstance(value, (int, float)):
                 raise TypeError(f"'{key}' must be a number")
-            if value <= 0:
+            if value < 0:
                 raise ValueError(f"'{key}' must be positive")
                 
         elif key in ["num_particles", "frames", "interval", "subsampling", "trail_length", "trail_width"]:

@@ -43,8 +43,8 @@ All functions require these parameters:
 | `width_line_x`        | `float`/`int`             | X-axis line thickness                                                       | `0.5`                 |
 | `width_line_y`        | `float`/`int`             | Y-axis line thickness                                                       | `0.5`                 |
 | `color_vector`        | [Matplotlib colormap](https://matplotlib.org/stable/gallery/color/colormap_reference.html)      | Colormap for vectors/streamlines  | `"autumn"` |
-| `vector_scale`        | `float`/`int`             | Vector scaling factor                                                       | `0.1`                 |
 | `width_line`          | `float`/`int`             | Line thickness for vectors/streamlines                                      | `2.0`                 |
+ `eps`          | `float`/`int`             | Possible deviation                                  | `1e-100`                 |
 
 ---
 
@@ -91,7 +91,7 @@ visualization(
     (-5, 5, 15), (-5, 5, 15)
 )
 ```
-![1](images/Figure_1.png)
+![1](images/Figure1.png)
 ```python
 visualization(
     lambda z: z * z,
@@ -101,7 +101,7 @@ visualization(
     contour_func=lambda t: np.exp(1j*t)
 )
 ```
-![2](images/Figure_2.png)
+![2](images/Figure2.png)
 ```python
 visualization(
     lambda z: z * z,
@@ -110,8 +110,9 @@ visualization(
     color_vector="plasma",
     title_plot='f(z) = $z^2$'
 )
-![3](images/Figure_3.png)
 ```
+![3](images/Figure3.png)
+
 ## 2. Static sphere
 ```python
 visualization_sphere(
@@ -122,7 +123,7 @@ visualization_sphere(
     contour_linewidth=3
 )
 ```
-![4](images/Figure_4.png)
+![4](images/Figure4.png)
 ## 3. Animmation 2D
 ```python
 visualization_anim(
@@ -157,7 +158,7 @@ animate_sphere(
     contour_func=lambda t: np.exp(2j * np.pi * t)
 )
 ```
-![7](images/Figure-7.gif)
+![7](images/Figure7.gif)
 ```python
 animate_sphere(
     lambda z: z,
@@ -166,7 +167,7 @@ animate_sphere(
     contour_func=lambda t: np.exp(2j * np.pi * t)
 )
 ```
-![8](images/Figure-8.gif)
+![8](images/Figure8.gif)
 #  Installation
 Run in terminal:
 ```bash
