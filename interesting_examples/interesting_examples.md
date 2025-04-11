@@ -42,7 +42,7 @@ visualization_anim(binomial_characteristic, (-5, 5, 20), (-5, 5, 20), show_vecto
 def poisson_characteristic(t, l=1):
     return np.exp(l * (np.exp(1j * t) - 1))
 
-visualization(poisson_characteristic, (-5, 5, 10000), (-5, 5, 10000),typr_plot="stream", title_plot="Graph of the characteristic function of the Poisson distribution")
+visualization(poisson_characteristic, (-5, 5, 10000), (-5, 5, 10000),type_plot="stream", title_plot="Graph of the characteristic function of the Poisson distribution")
 
 ```
 ![4](images/P(1).png)
